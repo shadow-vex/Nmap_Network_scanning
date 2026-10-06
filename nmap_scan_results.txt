@@ -1,0 +1,586 @@
+============================================================ 
+
+		NMAP NETWORK SCAN RESULTS 
+
+============================================================ 
+
+  
+
+Project: 
+
+Basic Network Scanning with Nmap 
+
+  
+
+Tool: 
+
+Nmap 7.991 
+
+  
+
+Target: 
+
+10.27.217.62 
+
+  
+
+Assessment Type: 
+
+Authorized Local Network / Lab Scan 
+
+  
+============================================================ 
+
+1. SCAN OVERVIEW 
+
+============================================================ 
+
+  
+
+The target host was reachable during the Nmap assessment. 
+
+  
+
+The default Nmap scan identified four open TCP ports: 
+
+  
+
+    135/tcp 
+
+    139/tcp 
+
+    445/tcp 
+
+    5000/tcp 
+
+  
+
+The scan reported 996 TCP ports as closed. 
+
+============================================================ 
+
+2. BASIC SCAN 
+
+============================================================ 
+
+  
+
+Command: 
+
+  
+
+nmap 10.27.217.62 
+
+  
+
+Observed Result: 
+
+  
+
+PORT     STATE    SERVICE 
+
+135/tcp  open     msrpc 
+
+139/tcp  open     netbios-ssn 
+
+445/tcp  open     microsoft-ds 
+
+5000/tcp open     upnp 
+
+  
+
+The basic scan confirmed that the target was reachable and 
+
+that four TCP ports were open. 
+
+
+============================================================ 
+
+3. SERVICE VERSION DETECTION 
+
+============================================================ 
+
+  
+
+Command: 
+
+  
+
+nmap -sV 10.27.217.62 
+
+  
+
+Observed Services: 
+
+  
+
+135/tcp 
+
+Service: Microsoft Windows RPC 
+
+  
+
+139/tcp 
+
+Service: Microsoft Windows NetBIOS Session Service 
+
+  
+
+445/tcp 
+
+Service: Microsoft-DS / SMB 
+
+  
+
+5000/tcp 
+
+Service: HTTP 
+
+Product: Werkzeug httpd 
+
+Version: 3.1.9 
+
+Runtime: Python 3.11.9 
+
+  
+
+Nmap also identified the operating system family as 
+
+Microsoft Windows. 
+
+  
+
+============================================================ 
+
+4. OS DETECTION 
+
+============================================================ 
+
+  
+
+Command: 
+
+  
+
+nmap -O 10.27.217.62 
+
+  
+
+Observed Result: 
+
+  
+
+Device Type: 
+
+General Purpose 
+
+  
+
+Operating System: 
+
+Microsoft Windows 11 
+
+  
+
+OS Details: 
+
+Microsoft Windows 11 24H2 - 25H2 
+
+  
+
+OS CPE: 
+
+cpe:/o:microsoft:windows_11 
+
+  
+
+Network Distance: 
+
+0 hops 
+
+  
+
+============================================================ 
+
+5. OPEN PORT ANALYSIS 
+
+============================================================ 
+
+ ------------------------------------------------------------ 
+
+PORT 135/TCP — MSRPC 
+
+------------------------------------------------------------ 
+
+  
+
+Service: 
+
+Microsoft Windows RPC 
+
+  
+
+Purpose: 
+
+Microsoft RPC is used by Windows components and applications 
+
+for communication between processes and network services. 
+
+  
+
+Security Risk: 
+
+MEDIUM 
+
+  
+
+Security Consideration: 
+
+RPC exposure can increase the attack surface of a Windows 
+
+system. Security concerns depend on which RPC services are 
+
+available, firewall configuration, authentication controls, 
+
+and whether the system is exposed beyond the trusted local 
+
+network. 
+
+  
+
+Recommendation: 
+
+- Restrict RPC access using Windows Firewall. 
+
+- Avoid exposing RPC services unnecessarily. 
+
+- Keep Windows security updates installed. 
+
+- Limit access to trusted networks and hosts. 
+
+ ------------------------------------------------------------ 
+
+PORT 139/TCP — NETBIOS-SSN 
+
+------------------------------------------------------------ 
+
+  
+
+Service: 
+
+Microsoft Windows NetBIOS Session Service 
+
+  
+
+Purpose: 
+
+NetBIOS Session Service supports legacy Windows network 
+
+communication and file/printer sharing functionality. 
+
+  
+
+Security Risk: 
+
+MEDIUM 
+
+  
+
+Security Consideration: 
+
+NetBIOS can expose legacy network services and increase 
+
+network discovery and lateral-movement opportunities when 
+
+unnecessarily enabled or exposed. 
+
+  
+
+Recommendation: 
+
+- Disable NetBIOS over TCP/IP when it is not required. 
+
+- Restrict access using Windows Firewall. 
+
+- Avoid exposing the service to untrusted networks. 
+
+- Prefer modern Windows networking mechanisms where possible. 
+
+ ------------------------------------------------------------ 
+
+PORT 445/TCP — MICROSOFT-DS / SMB 
+
+------------------------------------------------------------ 
+
+  
+
+Service: 
+
+Microsoft-DS / SMB 
+
+  
+
+Purpose: 
+
+SMB is used by Windows for network file sharing, printer 
+
+sharing, and related network operations. 
+
+  
+
+Security Risk: 
+
+MEDIUM TO HIGH 
+
+  
+
+Security Consideration: 
+
+SMB is an important Windows network service but can represent 
+
+a significant attack surface when exposed unnecessarily. 
+
+Security depends on SMB configuration, authentication, 
+
+patch level, firewall rules, and network exposure. 
+
+  
+
+Recommendation: 
+
+- Restrict SMB access to trusted networks. 
+
+- Block unnecessary inbound SMB traffic. 
+
+- Keep Windows fully patched. 
+
+- Disable SMB features/protocols that are not required. 
+
+- Use strong authentication and appropriate access controls. 
+
+
+ ----------------------------------------------------------- 
+
+PORT 5000/TCP — HTTP 
+
+------------------------------------------------------------ 
+
+  
+
+Service: 
+
+HTTP 
+
+  
+
+Product: 
+
+Werkzeug httpd 3.1.9 
+
+  
+
+Runtime: 
+
+Python 3.11.9 
+
+  
+
+Purpose: 
+
+The scan identified an HTTP service running through the 
+
+Werkzeug development server. 
+
+  
+
+Security Risk: 
+
+MEDIUM 
+
+  
+
+Security Consideration: 
+
+A web service can expose an additional application attack 
+
+surface. The Nmap result identifies Werkzeug 3.1.9 and 
+
+Python 3.11.9, but the scan alone does not establish that 
+
+the application is vulnerable. 
+
+  
+
+Recommendation: 
+
+- Determine whether the service is required. 
+
+- Do not expose development servers directly to untrusted 
+
+  networks. 
+
+- Use a properly configured production-grade deployment 
+
+  architecture for production applications. 
+
+- Keep the application and dependencies updated. 
+
+- Review authentication, input validation, and access controls. 
+
+
+============================================================ 
+
+6. SECURITY OBSERVATIONS 
+
+============================================================ 
+
+  
+
+1. Four TCP services were identified as open. 
+
+  
+
+2. Windows RPC, NetBIOS, and SMB services were exposed. 
+
+  
+
+3. SMB on TCP/445 should receive particular attention because 
+
+   it provides network file-sharing functionality and can 
+
+   represent a significant attack surface if improperly 
+
+   exposed. 
+
+  
+
+4. TCP/5000 was identified as an HTTP service running 
+
+   Werkzeug 3.1.9 with Python 3.11.9. 
+
+  
+
+5. The scan identified Microsoft Windows 11 as the operating 
+
+   system. 
+
+  
+
+6. Nmap results alone do not prove that any of the identified 
+
+   services are vulnerable. Further authorized vulnerability 
+
+   assessment would be required to establish specific 
+
+   vulnerabilities. 
+
+  
+
+============================================================ 
+
+7. RECOMMENDATIONS 
+
+============================================================ 
+
+  
+
+- Keep Microsoft Windows fully patched. 
+
+- Restrict unnecessary inbound network services. 
+
+- Review Windows Firewall rules. 
+
+- Restrict SMB and RPC access to trusted systems. 
+
+- Disable legacy NetBIOS where it is not required. 
+
+- Review whether the HTTP service on TCP/5000 is necessary. 
+
+- Avoid exposing development web servers directly to 
+
+  untrusted networks. 
+
+- Maintain strong authentication and access controls. 
+
+- Regularly review open ports and running services. 
+
+- Monitor network services for unexpected changes. 
+
+  
+
+============================================================ 
+
+8. LIMITATIONS 
+
+============================================================ 
+
+  
+
+This assessment is based on the Nmap scans provided for the 
+
+target 10.27.217.62. 
+
+  
+
+Nmap service and OS detection provide identification 
+
+information but do not by themselves prove the presence of 
+
+specific security vulnerabilities. 
+
+  
+
+The assessment should therefore be considered a network 
+
+enumeration and basic security-analysis exercise rather than 
+
+a complete vulnerability assessment. 
+
+  
+
+============================================================ 
+
+9. CONCLUSION 
+
+============================================================ 
+
+  
+
+The Nmap assessment successfully identified four open TCP 
+
+services on the target host: Microsoft RPC on port 135, 
+
+NetBIOS Session Service on port 139, Microsoft-DS/SMB on 
+
+port 445, and an HTTP service on port 5000. 
+
+  
+
+The target was identified as a Microsoft Windows 11 system, 
+
+with the service scan identifying Werkzeug HTTPD 3.1.9 running 
+
+with Python 3.11.9. 
+
+  
+
+The results demonstrate how Nmap can be used to identify 
+
+network exposure, discover running services, detect service 
+
+versions, and obtain operating-system information. 
+
+  
+
+From a defensive security perspective, unnecessary RPC, 
+
+NetBIOS, SMB, and web-service exposure should be reviewed and 
+
+restricted according to the system's operational requirements. 
+
+  
+============================================================ 
+
+			END OF REPORT 
+
+============================================================ 
